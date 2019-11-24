@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Character.cs" />
+    <Compile Include="Assets\Scripts\Unit.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/[University]/[Unity] Labs/Unity-Tasks/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

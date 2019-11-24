@@ -6,10 +6,11 @@ public enum CharState
 {
     Idle,
     Run,
-    Jump
+    Jump,
+    Sit
 }
 
-public class Character : MonoBehaviour
+public class Character : Unit 
 {
     [SerializeField] private float speed = 3.0F;
 
@@ -19,12 +20,13 @@ public class Character : MonoBehaviour
 
     private bool isGrounded = false;
 
+    private bool isSittingDown = false;
+
     private CharState State
     {
         get { return (CharState)animator.GetInteger("State"); }
         set { animator.SetInteger("State", (int)value); }
     }
-
 
     new private Rigidbody2D rigidbody;
     private Animator animator;
@@ -53,6 +55,7 @@ public class Character : MonoBehaviour
 
         if (Input.GetButton("Horizontal")) Run();
         if (isGrounded && Input.GetButtonDown("Jump")) Jump();
+        if (isGrounded && (Input.GetKey(KeyCode.DownArrow))) Sit();
     }
 
     private void Run()
@@ -72,6 +75,11 @@ public class Character : MonoBehaviour
         State = CharState.Jump;
 
         rigidbody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    private void Sit()
+    {
+        State = CharState.Sit;       
     }
 
     private void CheckGround()
