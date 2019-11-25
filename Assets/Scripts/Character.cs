@@ -10,7 +10,7 @@ public enum CharState
     Sit
 }
 
-public class Character : Unit 
+public class Character : Unit
 {
     [SerializeField] private float speed = 3.0F;
 
@@ -21,6 +21,8 @@ public class Character : Unit
     private bool isGrounded = false;
 
     private bool isSittingDown = false;
+
+    private Bullet bullet;
 
     private CharState State
     {
@@ -43,6 +45,7 @@ public class Character : Unit
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        bullet = Resources.Load<Bullet>("Bullet");
     }
 
     private void Start()
@@ -53,10 +56,22 @@ public class Character : Unit
     {
         if (isGrounded) State = CharState.Idle;
 
+        if (Input.GetButtonDown("Fire1")) Shoot();
         if (Input.GetButton("Horizontal")) Run();
         if (isGrounded && Input.GetButtonDown("Jump")) Jump();
         if (isGrounded && (Input.GetKey(KeyCode.DownArrow))) Sit();
     }
+
+    private void Shoot()
+    {
+        Vector3 position = transform.position;
+        position.y += 1;
+
+        Bullet newBullet = Instantiate(bullet, position, bullet.transform.rotation) as Bullet;
+
+        newBullet.Direction = newBullet.transform.right * (sprite.flipX ? -0.1F : 1.0F);
+    }
+
 
     private void Run()
     {
@@ -79,7 +94,7 @@ public class Character : Unit
 
     private void Sit()
     {
-        State = CharState.Sit;       
+        State = CharState.Sit;
     }
 
     private void CheckGround()
