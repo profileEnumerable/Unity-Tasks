@@ -22,6 +22,8 @@ public class Character : Unit
 
     private bool isSittingDown = false;
 
+    private Bullet bullet; 
+
     private CharState State
     {
         get { return (CharState)animator.GetInteger("State"); }
@@ -43,6 +45,8 @@ public class Character : Unit
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+
+        bullet = Resources.Load<Bullet>("Bullet");
     }
 
     private void Start()
@@ -56,6 +60,7 @@ public class Character : Unit
         if (Input.GetButton("Horizontal")) Run();
         if (isGrounded && Input.GetButtonDown("Jump")) Jump();
         if (isGrounded && (Input.GetKey(KeyCode.DownArrow))) Sit();
+        if (Input.GetButtonDown("Fire1")) Shoot();
     }
 
     private void Run()
@@ -81,6 +86,16 @@ public class Character : Unit
     {
         State = CharState.Sit;       
     }
+
+    private void Shoot()
+    {
+        Vector3 position = transform.position; position.y += 0.8F;
+        Bullet newBullet = Instantiate(bullet, position, bullet.transform.rotation) as Bullet;
+
+        newBullet.Parent = gameObject;
+        newBullet.Direction = newBullet.transform.right * (sprite.flipX ? -1.0F : 1.0F);
+    }
+
 
     private void CheckGround()
     {
