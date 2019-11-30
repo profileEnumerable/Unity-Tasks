@@ -7,10 +7,11 @@ public enum CharState
     Idle,
     Run,
     Jump,
-    Sit
+    Sit,
+    Die
 }
 
-public class Character : Unit 
+public class Character : Unit
 {
     [SerializeField] private float speed = 3.0F;
 
@@ -22,7 +23,7 @@ public class Character : Unit
 
     private bool isSittingDown = false;
 
-    private Bullet bullet; 
+    private Bullet bullet;
 
     private CharState State
     {
@@ -55,8 +56,8 @@ public class Character : Unit
 
     private void Update()
     {
-        if (isGrounded) State = CharState.Idle;
 
+        if (isGrounded && State != CharState.Die) State = CharState.Idle;
         if (Input.GetButton("Horizontal")) Run();
         if (isGrounded && Input.GetButtonDown("Jump")) Jump();
         if (isGrounded && (Input.GetKey(KeyCode.DownArrow))) Sit();
@@ -84,7 +85,7 @@ public class Character : Unit
 
     private void Sit()
     {
-        State = CharState.Sit;       
+        State = CharState.Sit;
     }
 
     private void Shoot()
@@ -96,10 +97,23 @@ public class Character : Unit
         newBullet.Direction = newBullet.transform.right * (sprite.flipX ? -1.0F : 1.0F);
     }
 
+    public override void ReceiveDamage()
+    {
+        livesCount--;
+
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.AddForce(transform.up * 10.0F, ForceMode2D.Impulse);
+
+        if (livesCount == 0)
+        {
+            State = CharState.Die;
+            Destroy(gameObject, 1.0F);
+        }
+    }
 
     private void CheckGround()
     {
-        if (!isGrounded) State = CharState.Jump;
+        if (!isGrounded && State != CharState.Die) State = CharState.Jump;
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3F);
 
