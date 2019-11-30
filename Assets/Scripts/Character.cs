@@ -16,7 +16,7 @@ public class Character : Unit
 
     [SerializeField] private byte livesCount = 6;
 
-    [SerializeField] private float jumpForce = 17.0F;
+    [SerializeField] private float jumpForce = 0F;
 
     private bool isGrounded = false;
 
