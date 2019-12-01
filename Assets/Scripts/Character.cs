@@ -11,7 +11,7 @@ public enum CharState
 
 public class Character : Unit
 {
-    [SerializeField] private float speed = 3.0F;
+    [SerializeField] private float speed = 100.0F;
 
     [SerializeField] private byte livesCount = 6;
 
@@ -113,5 +113,15 @@ public class Character : Unit
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3F);
 
         isGrounded = colliders.Length > 1;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        Unit unit = collider.gameObject.GetComponent<Unit>();
+
+        if (unit)
+        {
+            ReceiveDamage();
+        }
     }
 }
