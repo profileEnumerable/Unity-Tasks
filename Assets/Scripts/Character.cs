@@ -11,9 +11,21 @@ public enum CharState
 
 public class Character : Unit
 {
-    [SerializeField] private float speed = 100.0F;
+    private LivesCount livesBar;
 
-    [SerializeField] private byte livesCount = 6;
+    [SerializeField] private float speed = 10.0F;
+
+    [SerializeField] private int livesCount = 6;
+
+    public int Lives
+    {
+        get { return livesCount; }
+        set
+        {
+            if (value < 6) livesCount = value;
+            livesBar.Refresh();
+        }
+    }
 
     [SerializeField] private float jumpForce = 0F;
 
@@ -38,6 +50,7 @@ public class Character : Unit
 
     private void Awake()
     {
+        livesBar = FindObjectOfType<LivesCount>();
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
@@ -94,7 +107,7 @@ public class Character : Unit
 
     public override void ReceiveDamage()
     {
-        livesCount--;
+        Lives--;
 
         rigidbody.velocity = Vector3.zero;
         rigidbody.AddForce(transform.up * 10.0F, ForceMode2D.Impulse);

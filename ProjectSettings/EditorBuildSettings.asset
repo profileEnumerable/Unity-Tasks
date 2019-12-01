@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Ready-Hero.unity
+    guid: cdaaaaef23b95f84f96e6e433c57dcd3
+  - enabled: 1
+    path: Assets/Ready-Hero 1.unity
+    guid: e32bb4b977f8c824ab0f887728db822b
+  - enabled: 1
+    path: Assets/Ready-Hero 2.unity
+    guid: c9f20a6ddbf5ce6478a950f3230c522b
   m_configObjects: {}

@@ -67,7 +67,9 @@
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Character.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\LivesCount.cs" />
     <Compile Include="Assets\Scripts\MoveableEnemy.cs" />
+    <Compile Include="Assets\Scripts\SceneMenegment\NextScene.cs" />
     <Compile Include="Assets\Scripts\ShootableEnemy.cs" />
     <Compile Include="Assets\Scripts\SwordObstacle.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
