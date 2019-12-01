@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 public class CameraController : MonoBehaviour
 {
     [SerializeField]
@@ -16,8 +15,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        Vector3 position = target.position;
-        position.z = -10.0F;
+        Vector3 position = target.position; position.z = -10.0F;
         transform.position = Vector3.Lerp(transform.position, position, speed * Time.deltaTime);
     }
 }

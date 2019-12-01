@@ -117,9 +117,8 @@ public class Character : Unit
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        Unit unit = collider.gameObject.GetComponent<Unit>();
-
-        if (unit)
+        Bullet bullet = collider.gameObject.GetComponent<Bullet>();
+        if (bullet && bullet.Parent != gameObject)
         {
             ReceiveDamage();
         }
