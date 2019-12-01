@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum CharState
 {
@@ -20,9 +18,6 @@ public class Character : Unit
     [SerializeField] private float jumpForce = 0F;
 
     private bool isGrounded = false;
-
-    private bool isSittingDown = false;
-
     private Bullet bullet;
 
     private CharState State
