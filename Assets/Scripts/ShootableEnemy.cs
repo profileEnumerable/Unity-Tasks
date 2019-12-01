@@ -17,12 +17,13 @@ public class ShootableEnemy : Enemy
 
     protected override void Start()
     {
-        Debug.Log(rate);
+        
         InvokeRepeating("Shoot", rate, rate);
     }
 
     private void Shoot()
     {
+        Debug.Log("Shoot");
         Vector3 position = transform.position; position.y += 0.5F;
         Bullet newBullet = Instantiate(bullet, position, bullet.transform.rotation) as Bullet;
 
