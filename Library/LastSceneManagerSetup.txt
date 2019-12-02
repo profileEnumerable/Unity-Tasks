@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Ready-Hero 2.unity
+- path: Assets/Ready-Hero.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

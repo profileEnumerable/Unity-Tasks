@@ -1,13 +1,5 @@
 ﻿using UnityEngine;
 
-public enum CharState
-{
-    Idle,
-    Run,
-    Jump,
-    Sit,
-    Die
-}
 
 public class Character : Unit
 {
@@ -135,5 +127,14 @@ public class Character : Unit
         {
             ReceiveDamage();
         }
+    }
+
+    public enum CharState
+    {
+        Idle,
+        Run,
+        Jump,
+        Sit,
+        Die
     }
 }
